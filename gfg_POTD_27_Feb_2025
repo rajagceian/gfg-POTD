@@ -1,0 +1,54 @@
+class Solution {
+    
+  public:
+  stack <int> st;
+  int min_ele  = INT_MAX;
+  vector <int> arr;
+    Solution() {
+        // code here
+        min_ele = INT_MAX;
+        arr.clear();
+    }
+
+    // Add an element to the top of Stack
+    void push(int x) {
+        // code here
+        min_ele = min(min_ele , x);
+        arr.push_back(x);
+        st.push(x);
+    }
+
+    // Remove the top element from the Stack
+    void pop() {
+        // code here
+        if(st.empty()) return;
+   
+            int temp = INT_MAX;
+            for(int i=0;i<arr.size();i++){
+                if(arr[i]==st.top()){
+                    arr.erase(arr.begin()+i);
+                    break;
+                }
+            }
+            for(int ele : arr){
+                temp = min(temp,ele);
+            }
+            min_ele = temp;
+        
+        st.pop();
+    }
+
+    // Returns top element of the Stack
+    int peek() {
+        // code here
+        if(st.empty()) return -1;
+        return st.top();
+    }
+
+    // Finds minimum element of Stack
+    int getMin() {
+        // code here
+        
+        return min_ele == INT_MAX ? -1 : min_ele;
+    }
+};
